@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Datasets and heavy data archives
+data/msc_v0.1.tar.gz
+data/msc/
+data/features.csv
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary log files and heavy archives
+*.log
+proj.zip
+results/presentation_slides_and_script.md

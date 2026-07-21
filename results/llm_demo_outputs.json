@@ -1,0 +1,344 @@
+[
+  {
+    "conversation_id": 0,
+    "query": "When do you think you will travel to New Orleans next?",
+    "strategies": {
+      "no_memory": {
+        "n_memories": 0,
+        "memories": [],
+        "response": "I'm just a large language model, I don't have a physical presence or personal experiences, but I can provide information about traveling to New Orleans. However, I'd be happy to help you plan your own trip! Would you like some recommendations on things to see and do in the city?"
+      },
+      "store_all": {
+        "n_memories": 38,
+        "memories": [
+          "I need some advice on where to go on vacation, have you been anywhere lately?",
+          "I have been all over the world. I'm military.",
+          "That is good you have alot of travel experience",
+          "Sure do. And a lot of experience blowing things up! Haha. Bora bora is nice.",
+          "I've been working non stop crazy hours and need a break.",
+          "The best breaks are spent with cute cuddly kittens.",
+          "Bora bora sounds nice, you have been there before?",
+          "Nope... Just sounds nice, and repetitive. Bora... Bora. Ha!",
+          "Kittens really? I rather be at the beach.",
+          "Only if the beach was covered in kittens!",
+          "That would be a sight to see.",
+          "Or maybe brownies... I love chocolate.",
+          "I love brownies too but I haven't quite perfected mine yet.",
+          "Well I'm available to taste test!",
+          "Are you still in the military?",
+          "No, I have no longer serve in the millitary, I had served up the full term that I signed up for, and now work outside of the millitary.",
+          "Oh wow that's very admirable. What do you do now?",
+          "I work as an electrical engineer for a private company, I was trained in the millitary as such and I found out that I not only liked it, but I was good at it as well.",
+          "Thats really impressive. I am a mechanical engineer so I can relate. What kind of stuff do you work on",
+          "I troubleshoot equipment that the company either sells to its customers, or that it rents to its customers. I also install and test their equipment, to ensure that it not only works, but it also is safe to use in a household."
+        ],
+        "response": "I've got my week-long break from work lined up for next month, but I haven't made any specific plans yet, so who knows when I'll actually make it down to New Orleans! I'm still browsing through options and gathering recommendations, like getting some advice from a seasoned traveler like yourself."
+      },
+      "top_k": {
+        "n_memories": 5,
+        "memories": [
+          "How nice!  Where are you going?",
+          "I like relaxing places, like the beaches.  I love New Orleans, the entertainment is great there.  That is where I'm going on my next vacation.  What is your cousin going to do about the wiring in his house?",
+          "I need some advice on where to go on vacation, have you been anywhere lately?",
+          "Did not decided yet, I'd like to get an idea about traveling as you are big traveller.",
+          "I've booked myself a week long vacation from work next month!"
+        ],
+        "response": "I'm actually planning on heading there soon too - I've already booked my trip for next month! I'm really looking forward to experiencing all the entertainment and food that the city has to offer. We can swap recommendations when we're both in town."
+      },
+      "ml_selected": {
+        "n_memories": 16,
+        "memories": [
+          "I have been all over the world. I'm military.",
+          "Sure do. And a lot of experience blowing things up! Haha. Bora bora is nice.",
+          "Nope... Just sounds nice, and repetitive. Bora... Bora. Ha!",
+          "Oh wow that's very admirable. What do you do now?",
+          "Right on, thats pretty cool. Like generators and motors or household items?",
+          "Oh it was. I cant imagine taking something like that on. But its definitely worth it to keep his home safe.",
+          "How nice!  Where are you going?",
+          "Did not decided yet, I'd like to get an idea about traveling as you are big traveller.",
+          "I like relaxing places, like the beaches.  I love New Orleans, the entertainment is great there.  That is where I'm going on my next vacation.  What is your cousin going to do about the wiring in his house?",
+          "Thank you for the suggestions. I am going to take a look for all place which is available for now. Glad to ask about my cousin, seems like he is having bad times, because of the conditions, those house problem etc. Hope he can figure it out soon. If he has questions about those wiring things, can I give your contact to him?",
+          "Yes I would be glad to help in any way I can.  Does he live close to you?",
+          "You're so sweet thank you again. Unfortunately, we are not living close enough. If we are living close, I am for sure there things I can help to him",
+          "Well I'm sure I can help him get headed in the right direction with what to do.  He might have to send me photos of some of the problems.  Do you think it is really serious?",
+          "I guess that problems are serious, but I am not a professional one so I do not know about much. I am so glad to have you. You are experienced, professional, so there are nothing to worry about right?",
+          "Yes, I've fixed lots of electrical problems.  I have some out of town work I'll be doing, maybe I can stop by his house if isn't too far.",
+          "Thank you as always. First I need you contact my cousin then I'll let you know. I do not want to bother you. I know you have tons of things to do"
+        ],
+        "response": "New Orleans is definitely a great destination - I've got a vacation planned there for my next break, and I'm really looking forward to it! The entertainment scene there is just incredible. Unfortunately, with my schedule being what it is, I haven't finalized exact dates yet, but I'm hoping to make it down there within the next few months."
+      }
+    }
+  },
+  {
+    "conversation_id": 1,
+    "query": "I started a new diet that should help with my blood sugar",
+    "strategies": {
+      "no_memory": {
+        "n_memories": 0,
+        "memories": [],
+        "response": "\"That's great! Have you talked to your doctor about it or are you just starting it on your own? There are some diets that have been specifically studied for their effects on blood sugar control, such as low-carb or Mediterranean-style eating.\""
+      },
+      "store_all": {
+        "n_memories": 28,
+        "memories": [
+          "Hello! What are you up to?",
+          "I'm reading for a exam I've and you?",
+          "Just finished playing with my three dogs here at home.",
+          "Cool 3 dogs. I'll get a dog when I'm done with school next september",
+          "Sounds good. What kind will you get?",
+          "A pit bull. I'll get him when I find a teaching job",
+          "I teach drums and I play them really well.",
+          "Wow my brother is in a heavy medal group and goes all around the world",
+          "That's awesome! Do you play any sports?",
+          "No I really do not have time. College is hard lol",
+          "I bet. I work out, even though I don't like to, but need to.",
+          "My mom and dad work out a lot. They came here when I was 5",
+          "I work out to stay healthy. I've a problem with my blood sugar.",
+          "Oh wow I hoe you stay healthy for a long time",
+          "Thanks. I check it everyday.",
+          "That is cool so what else do you like?",
+          "How is the preparation for your exam going?",
+          "It's not.. really.  I've been procrastinating a bit.  Any tips on how to buckle down?",
+          "Procrastinating is a hard habit to break. Just stop doing it.",
+          "Haha easier said than done!  Kind of like monitoring your blood sugar, how's that going for you lately?  Do you feel well?"
+        ],
+        "response": "That's great to hear! I've been trying to get back on track myself after the holiday season - I gained about 10 pounds between November and December, so we're probably going through similar struggles. How's your new diet plan working out so far?"
+      },
+      "top_k": {
+        "n_memories": 5,
+        "memories": [
+          "I work out to stay healthy. I've a problem with my blood sugar.",
+          "Oh, yeah, that's how my mom is.  She's right at the point where if it gets any higher she would be technically diabetic and have to be put on medicine.  Do you take any medicine for it?",
+          "Haha easier said than done!  Kind of like monitoring your blood sugar, how's that going for you lately?  Do you feel well?",
+          "How does that work?  Is it based on what you eat or is hereditary?  Would exercising more help at all?",
+          "They told me that I got it by eating wrong in the first place by eating bad most of my life."
+        ],
+        "response": "That's great to hear! I've been trying to do the same thing, adjusting my workout routine and diet to keep my blood sugar under control. What kind of diet are you starting?"
+      },
+      "ml_selected": {
+        "n_memories": 15,
+        "memories": [
+          "I'm reading for a exam I've and you?",
+          "Cool 3 dogs. I'll get a dog when I'm done with school next september",
+          "A pit bull. I'll get him when I find a teaching job",
+          "My mom and dad work out a lot. They came here when I was 5",
+          "I work out to stay healthy. I've a problem with my blood sugar.",
+          "It's not.. really.  I've been procrastinating a bit.  Any tips on how to buckle down?",
+          "Procrastinating is a hard habit to break. Just stop doing it.",
+          "Haha easier said than done!  Kind of like monitoring your blood sugar, how's that going for you lately?  Do you feel well?",
+          "You are right my friend. It's still all over the place.",
+          "How does that work?  Is it based on what you eat or is hereditary?  Would exercising more help at all?",
+          "Oh, yeah, that's how my mom is.  She's right at the point where if it gets any higher she would be technically diabetic and have to be put on medicine.  Do you take any medicine for it?",
+          "I use to but through time I was able to control it with diet. I think I got off kilter at Christmas with all the deserts. Here we go bad habitsLOL",
+          "Oh, don't even get me started on how much I ate around the holidays, not just Christmas day! lol I think I gained at least 5 pounds from cookies alone!",
+          "You know I did literally gain 10 pounds between November and December.",
+          "With Spring coming soon, I'm sure there will be more ways to burn it off with outside activities.  It's hard to lose weight being cooped up in the house all winter!"
+        ],
+        "response": "That's great! I'm sure it'll be a challenge, but you've been able to control your blood sugar through diet before, so I have faith in you. Hopefully you can get back on track and avoid having to rely on medicine like you used to."
+      }
+    }
+  },
+  {
+    "conversation_id": 2,
+    "query": "Have you been able to work on your photography website",
+    "strategies": {
+      "no_memory": {
+        "n_memories": 0,
+        "memories": [],
+        "response": "Actually, I haven't had a chance to work on my photography website yet - I've been busy with other projects and haven't had the time to focus on it. But now that you mention it, I think I'll make some time for it this week!"
+      },
+      "store_all": {
+        "n_memories": 24,
+        "memories": [
+          "Hi, how are you doing today?",
+          "Hi, I'm great. What do you do for a living?",
+          "I am a housekeeper for three families in my area. What do you do?",
+          "I am an environmental engineer, and have outdoor hobbies.",
+          "I love the outdoors. Especially in the fall and winter. Do you ice skate?",
+          "I like hiking. I take photos in the outdoors.",
+          "Cool, I was never good at photography. I'll bet you take great pics on the hiking trails.",
+          "Yes, and it is a good hobby for an environmental engineer.",
+          "True. Do you like gardening? I love growing my own vegetables.",
+          "I've never done that. It sounds fun and healthy though.",
+          "Yes, I love eating healthy foods.",
+          "Do you have family? I'm single.",
+          "I picked some vegetables from my garden",
+          "What kind of vegetables do you grow?",
+          "Tomatoes, squash, potatoes, lettuce, and a few herbs. I'm also trying out cucumbers for the first time this year, but it's not going so well. Something keeps eating them. I have lots of tomatoes. Do you want some?",
+          "I would LOVE some tomatoes. They are my favorite vegetable..well technically fruit (but that is my environmental engineer background coming out, haha). What kind of food do you make with you vegetables?",
+          "I've been trying a lot of new recipes lately. I made a squash soup with fresh rosemary the other day that was delicious! Did you make it to the park to hike last weekend?",
+          "Yum!! That sounds so good! Yes I did, I went on a 5 mile hike. I was actually going to camp overnight but the weather got bad so I turned back. Maybe next time. But I did get some great photos! Would you like to see them?",
+          "I would love to! You're such a good photographer. I think you missed your calling. I wish I had more time to get outdoors these days. Work is killing me.",
+          "Aww thank you. It's definitely my favorite hobby. I think I'll start a website showcasing my photos. What do you think?"
+        ],
+        "response": "I've actually been pretty busy with my housekeeping jobs and haven't had as much time to focus on the website as I'd like. But I did manage to get some photos from our last conversation's hike to put up - the ones of you holding a squash are favorites of mine! I'm planning to work on it more this week, though."
+      },
+      "top_k": {
+        "n_memories": 5,
+        "memories": [
+          "I would love to! You're such a good photographer. I think you missed your calling. I wish I had more time to get outdoors these days. Work is killing me.",
+          "Aww thank you. It's definitely my favorite hobby. I think I'll start a website showcasing my photos. What do you think?",
+          "Cool, I was never good at photography. I'll bet you take great pics on the hiking trails.",
+          "I think that's a great idea. Or you could try to show at the art crawl they do every month. I don't think it costs very much to participate, and you might sell some prints. Then I could say I know a famous artist.",
+          "Yum!! That sounds so good! Yes I did, I went on a 5 mile hike. I was actually going to camp overnight but the weather got bad so I turned back. Maybe next time. But I did get some great photos! Would you like to see them?"
+        ],
+        "response": "I actually haven't had a chance to focus on it as much as I'd like since our last conversation. Between work and everything else, life got busy again. But I've been meaning to dive back in and start posting some of my favorite shots from that 5-mile hike we were talking about..."
+      },
+      "ml_selected": {
+        "n_memories": 14,
+        "memories": [
+          "Hi, I'm great. What do you do for a living?",
+          "I am a housekeeper for three families in my area. What do you do?",
+          "I love the outdoors. Especially in the fall and winter. Do you ice skate?",
+          "Cool, I was never good at photography. I'll bet you take great pics on the hiking trails.",
+          "Tomatoes, squash, potatoes, lettuce, and a few herbs. I'm also trying out cucumbers for the first time this year, but it's not going so well. Something keeps eating them. I have lots of tomatoes. Do you want some?",
+          "I would LOVE some tomatoes. They are my favorite vegetable..well technically fruit (but that is my environmental engineer background coming out, haha). What kind of food do you make with you vegetables?",
+          "I've been trying a lot of new recipes lately. I made a squash soup with fresh rosemary the other day that was delicious! Did you make it to the park to hike last weekend?",
+          "Yum!! That sounds so good! Yes I did, I went on a 5 mile hike. I was actually going to camp overnight but the weather got bad so I turned back. Maybe next time. But I did get some great photos! Would you like to see them?",
+          "I would love to! You're such a good photographer. I think you missed your calling. I wish I had more time to get outdoors these days. Work is killing me.",
+          "Aww thank you. It's definitely my favorite hobby. I think I'll start a website showcasing my photos. What do you think?",
+          "I think that's a great idea. Or you could try to show at the art crawl they do every month. I don't think it costs very much to participate, and you might sell some prints. Then I could say I know a famous artist.",
+          "Hey that is a fantastic idea! I'll even give you a discount! (haha just kidding - you can have some for free). I think you should try and take a break from work when you can and maybe we can go on a nice long hike together.",
+          "I would love that. Work should slow down soon. I have a lot of move-out cleanings to do, which are only one time jobs. Maybe next weekend?",
+          "That works for me! There's a nice little hike to a waterfall that I'd love to do. We can take some cool photos too!"
+        ],
+        "response": "I've been meaning to get back to it, but life got busy with work and a lot of move-out cleanings from my clients. I did manage to squeeze in some time last week to start uploading some of my favorite photos from our hike to the waterfall, though!"
+      }
+    }
+  },
+  {
+    "conversation_id": 3,
+    "query": "Have you and your friend thought about any specifics for your potential company?",
+    "strategies": {
+      "no_memory": {
+        "n_memories": 0,
+        "memories": [],
+        "response": "We actually just started brainstorming some ideas for our company's mission statement, focusing on innovative solutions for sustainable energy storage. We're considering a name like \"Pulse\" to represent the flow of clean energy. It's still early days, but we're excited about the possibilities."
+      },
+      "store_all": {
+        "n_memories": 28,
+        "memories": [
+          "Hi, how are you today?",
+          "Fine, thanks! Just getting up, though. Went to bed late.",
+          "Good morning, then! Hot enough for you? Ca not wait for winter.",
+          "Yeah, I like winter, though I do not go outside much anyway.",
+          "Same here, its a little hard with my wheelchair.",
+          "Oh, I imagine so! I do not have a wheelchair, but I'm in school. Computer engineering.",
+          "Interesting! With cooler weather coming you gotta watch out for colds. Don't wanna miss class!",
+          "Yeah, that is true. I've a real passion for computer programming.",
+          "I always stock up on vitamin c, just in case. Programming sounds like fun!",
+          "Its fun. I hope to use it to open my own company with my best friend.",
+          "Friends are the best! My vestie actually bought me a car last year. Totally surprised me!",
+          "That's awesome! My best friend is actually gay, but I'm not.",
+          "Love is love! Good luck with your business venture!",
+          "I agree! And thanks very much. I hope it works out.",
+          "Just keep to it one thing my disability has taught me is to never stop trying!",
+          "That's extremely inspirational, thanks.",
+          "How is school going?",
+          "Going well, on my computer all the time. How are you?",
+          "Does it ever get tiring staring at a computer all day?  I get headaches sometimes when I have to.  I'm doing alright.  I'm enjoying all the snow we are getting.",
+          "Sometimes it does get tiring. Are you getting enough sun still?"
+        ],
+        "response": "We've actually been tossing around a few ideas, like developing software for adaptive technology that could help people with disabilities like mine navigate snowy conditions more easily. My friend is actually working on a prototype for a smartphone app that would provide real-time updates on accessible routes and pedestrian-friendly areas during snowstorms. It's still in the early stages, but we're excited about its potential."
+      },
+      "top_k": {
+        "n_memories": 5,
+        "memories": [
+          "Its fun. I hope to use it to open my own company with my best friend.",
+          "Love is love! Good luck with your business venture!",
+          "I always stock up on vitamin c, just in case. Programming sounds like fun!",
+          "Friends are the best! My vestie actually bought me a car last year. Totally surprised me!",
+          "That's awesome! My best friend is actually gay, but I'm not."
+        ],
+        "response": "We've been tossing around a few ideas, but nothing's solidified yet. We're both pretty passionate about tech, so we're thinking of doing something with programming or maybe even developing our own app."
+      },
+      "ml_selected": {
+        "n_memories": 14,
+        "memories": [
+          "Fine, thanks! Just getting up, though. Went to bed late.",
+          "Good morning, then! Hot enough for you? Ca not wait for winter.",
+          "Oh, I imagine so! I do not have a wheelchair, but I'm in school. Computer engineering.",
+          "Interesting! With cooler weather coming you gotta watch out for colds. Don't wanna miss class!",
+          "Yeah, that is true. I've a real passion for computer programming.",
+          "Friends are the best! My vestie actually bought me a car last year. Totally surprised me!",
+          "That's awesome! My best friend is actually gay, but I'm not.",
+          "I agree! And thanks very much. I hope it works out.",
+          "Going well, on my computer all the time. How are you?",
+          "Does it ever get tiring staring at a computer all day?  I get headaches sometimes when I have to.  I'm doing alright.  I'm enjoying all the snow we are getting.",
+          "Sometimes it does get tiring. Are you getting enough sun still?",
+          "I see. And how's your wheelchair handling in snowy conditions?",
+          "Sorry, sent that last one a bit early by accidentally hitting send!  The wheelchair doesn't do too well in the snow and neither does the sedan.  What kind of vehicle to you drive?",
+          "I wish I had a truck.  The city side walks are usually pretty good.  The snow is bad on the side walks in the neighborhoods."
+        ],
+        "response": "I've been meaning to discuss that with my friend who bought me a car last year - we were actually brainstorming some ideas for a project together. It's funny, I was thinking about that just the other day while working on some code. Do you think it would be worth exploring as a side business?"
+      }
+    }
+  },
+  {
+    "conversation_id": 4,
+    "query": "How are the chickens and mongoose?",
+    "strategies": {
+      "no_memory": {
+        "n_memories": 0,
+        "memories": [],
+        "response": "I'm not aware of any chickens or mongooses on my property, but I do know that a mongoose is typically a solitary animal and would not normally be found with chickens as they are prey for mongooses. However, it's possible you're referring to a farm or other setting where they coexist?"
+      },
+      "store_all": {
+        "n_memories": 26,
+        "memories": [
+          "Hello. What are you doing? I am cooking, I love to cook!",
+          "Hello, I am trying to fix my friends computer right now",
+          "Ah. One of my 3 children broke mine.",
+          "Ok, well I fix computers. What is your favorite dish to cook?",
+          "Italian. I immigrated when I was 14",
+          "I love italian food. I was raised on a farm that my family owns",
+          "My family doesn't speak english very well, but I speak italian and english.",
+          "Ok, my family encouraged me to love meat. We like to grill a lot.",
+          "Nice. I was married off when I was younger. My spouse loves to grill as well.",
+          "Married off? Wow... How do you feel about that?",
+          "I felt angry about it. But that was then and this is now.",
+          "Ok glad you can turn a negative into a positive",
+          "I'm a realist by nature. Change what you can and accept what you can not.",
+          "I could not agree more",
+          "Did you manage to fix your friends computer?",
+          "I did thankfully, strangest thing with that. I thought it would be a software issue but it wasn't. The machine was literally filled with dust, had to give it a thoroughly good cleaning.",
+          "Oh dear, grim! I bet you see some horrible things in computers? What are you planning to eat this weekend Italian or Grill?",
+          "Why not both? We recently got an extension placed on the grill so we can do pizza, so I think we'll just have a smattering of both, how about you? Having some italian this weekend?",
+          "omg, that sounds amazing - i've always wanted a pizza add-on to the grill but my wife won't let me, she's a purist! Yeah she's away, so it's a pizza night in front of the TV for me ;) What's your favourite topping?",
+          "I'd have to say cheese, definitely a must for my pizza, what about yourself?"
+        ],
+        "response": "They've become quite the unlikely duo! The chickens were initially a bit wary of the mongoose, but now they seem to have formed an alliance - I'm not sure what that means for our peace and quiet around here. To be honest, it's a bit unnerving to see them plotting together..."
+      },
+      "top_k": {
+        "n_memories": 5,
+        "memories": [
+          "Not with that attitude, I've learned from my time on the farm that if you put in the effort any animal can be tamed. The mongoose and the chickens are now awfully close to each other, I think they're planning something.. Something menacing!",
+          "Haha a mongoose?! That's amazing! Are the all friendly? My favourite animal is a Tiger, but I don't think you could keep one on a farm!",
+          "Cows, sheep, chickens and even a mongoose. Where they keep getting these from I don't know, I feel like babe among the animals! What's your favourite animal?",
+          "Yeah fair enough - it's closer to the original Italian Pizza as well! How's your families farm doing? I saw that they'd recently bought some more cows?",
+          "Ok, my family encouraged me to love meat. We like to grill a lot."
+        ],
+        "response": "They're still getting along surprisingly well! I'm keeping a close eye on them, though - I did mention that they seem to be plotting something together. I've even caught one of the chickens sneaking into the mongoose's den late at night... not sure what's going on in there, but it doesn't look good."
+      },
+      "ml_selected": {
+        "n_memories": 13,
+        "memories": [
+          "Hello. What are you doing? I am cooking, I love to cook!",
+          "Ah. One of my 3 children broke mine.",
+          "Ok, well I fix computers. What is your favorite dish to cook?",
+          "Married off? Wow... How do you feel about that?",
+          "I did thankfully, strangest thing with that. I thought it would be a software issue but it wasn't. The machine was literally filled with dust, had to give it a thoroughly good cleaning.",
+          "Oh dear, grim! I bet you see some horrible things in computers? What are you planning to eat this weekend Italian or Grill?",
+          "Why not both? We recently got an extension placed on the grill so we can do pizza, so I think we'll just have a smattering of both, how about you? Having some italian this weekend?",
+          "omg, that sounds amazing - i've always wanted a pizza add-on to the grill but my wife won't let me, she's a purist! Yeah she's away, so it's a pizza night in front of the TV for me ;) What's your favourite topping?",
+          "definitely cheese, but i do love olives on top of pizza as well! Deep pan or Thin pizza base?",
+          "Yeah fair enough - it's closer to the original Italian Pizza as well! How's your families farm doing? I saw that they'd recently bought some more cows?",
+          "Cows, sheep, chickens and even a mongoose. Where they keep getting these from I don't know, I feel like babe among the animals! What's your favourite animal?",
+          "Haha a mongoose?! That's amazing! Are the all friendly? My favourite animal is a Tiger, but I don't think you could keep one on a farm!",
+          "Not with that attitude, I've learned from my time on the farm that if you put in the effort any animal can be tamed. The mongoose and the chickens are now awfully close to each other, I think they're planning something.. Something menacing!"
+        ],
+        "response": "\"Ha! Oh dear, they've been up to no good, I'm sure of it! The chicken and mongoose have become quite inseparable, it's like a odd little friendship, but I do worry about what kind of chaos they might be plotting...\""
+      }
+    }
+  }
+]
