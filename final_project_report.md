@@ -46,13 +46,13 @@ The third implementation, "Chatbot with Conversation History using LangChain" by
 
 The data analysis was performed on the Multi-Session Chat (MSC) dataset [1]. We loaded 500 multi-session conversations, extracting candidate memories from sessions 1 to 4, and treating the first turn of session 5 as the query. We applied preprocessing to exclude questions and short utterances containing fewer than 4 words, as these represent transitional filler rather than retrieve-worthy memories. This resulted in a tabular dataset containing $N = 8,601$ candidate memories. Each memory was labeled as important ($1$) or unimportant ($0$) using our reference heuristic, which checks if the memory is referenced anywhere in the future session via semantic similarity, lexical overlap, or entity sharing. Of these $8,601$ candidate memories, only $1,507$ were labeled as important, resulting in a positive class rate of $17.5\%$. This extreme class imbalance has major implications for model training; a naive baseline predicting all memories as unimportant would achieve $82.5\%$ accuracy but fail completely at retrieving memories. Therefore, precision, recall, and F1-score are critical metrics, while accuracy is highly misleading.
 
-To represent conversational dynamics, we engineered 10 features for each candidate memory. The first feature is *recency*, computed as the number of dialogue turns between the memory and the query. The second feature is *session gap*, representing the number of sessions between the memory and the query. The third feature is *access frequency*, which measures the number of times a memory was highly similar (cosine similarity $\ge 0.5$) to past user turns that occurred *after* its creation, acting as a simulated retrieval count. The fourth feature is *semantic similarity*, representing the cosine similarity between the memory and query embeddings computed via Sentence-BERT. The fifth feature is *role user*, a binary indicator denoting whether the speaker was the user ($1$) or the agent ($0$). The sixth feature is *sentence length*, calculated as the word count of the memory. The seventh feature is *is question*, indicating whether the utterance contains a question mark. The eighth feature is *entity count*, representing the number of capitalized non-sentence-initial tokens as a proxy for entities. The ninth feature is *first person*, a binary feature checking for the presence of first-person pronouns. The tenth feature is *position in session*, which calculates the relative index of the turn within its session, scaled between $0$ and $1$.
+To represent conversational dynamics, we engineered 10 features for each candidate memory. The first feature is *recency*, computed as the number of dialogue turns between the memory and the query. The second feature is *session gap*, representing the number of sessions between the memory and the query. The third feature is *access frequency*, which measures the number of times a memory was highly similar (cosine similarity $\ge 0.5$) to past user turns that occurred *after* its creation, acting as a simulated retrieval count. The fourth feature is *semantic similarity*, representing the cosine similarity between the memory and query embeddings computed via Sentence-BERT. The fifth feature is *role user*, a binary indicator denoting whether the speaker was the user ($1$) or the agent ($0$). The sixth feature is *sentence length*, calculated as the word count of the memory. The seventh feature is *entity count*, representing the number of capitalized non-sentence-initial tokens as a proxy for entities. The eighth feature is *first person*, a binary feature checking for the presence of first-person pronouns. The ninth feature is *position in session*, which calculates the relative index of the turn within its session, scaled between $0$ and $1$. The pipeline also retains *is question* (presence of a question mark) in the feature vector for structural compatibility; however, because all questions are filtered out during candidate preprocessing, this feature is constant zero for all $8,601$ rows and carries no predictive signal. The final PCA component's explained variance of $0.0$ confirms this.
 
 To understand feature redundancies and capture latent patterns, we performed a Principal Component Analysis (PCA) on the standardized features. The explained variance ratios for the components are $[0.302, 0.153, 0.118, 0.107, 0.095, 0.092, 0.084, 0.047, 0.001, 0.0]$. The first three components explain approximately $57.3\%$ of the total variance, while the first eight components explain over $99.9\%$. This scree analysis indicates that while some collinearity exists (especially between recency, session gap, and access frequency), the features represent a diverse set of signals that cannot be compressed into a low-dimensional space without losing predictive performance.
 
 Our Random Forest feature importance analysis reveals that access frequency, recency, and semantic similarity are the three most predictive features in our dataset. Access frequency, which simulates how active a memory was in past dialogue turns, has the highest predictive power, followed closely by recency (how recently the memory was spoken). This suggests that temporal dynamics and historical retrieval frequency are far more useful indicators of whether a user will reference a fact again than simple sentence length or syntactic markers.
 
-We also performed a manual validation audit on a random stratified sample of 200 rows to evaluate the validity of our labeling heuristic against human memory judgments. Two human annotators labeled the sample to indicate whether each turn represented a long-term user fact or preference (e.g., name, age, pets, favorite foods) or transient dialogue filler (e.g., greetings, general questions). The evaluation of the heuristic against these human labels yielded an accuracy of $0.540$, a precision of $0.520$, and a recall of $0.542$ (F1 = $0.531$). A detailed inspection revealed that Jaccard/cosine-based vocabulary overlap heuristics suffer from construct invalidity: they systematically favor generic greetings (e.g., "Hi! How are you today?") and questions because their high-frequency content words frequently recur, while discarding unique personal facts whose exact wording does not repeat. This finding highlights the importance of filtering out questions and short turns from candidate memory pools to prevent retrieval systems from storing conversational noise.
+As a sanity check on our labeling heuristic, we applied a rule-based persona-detection proxy (`scripts/label_validation.py`) to a stratified random sample of 200 rows. This proxy classifies turns as persona-relevant if they contain first-person declarations of identity, preferences, relationships, or biographical facts (e.g., "I am a mechanical engineer," "my dog is a Great Dane"), and classifies greetings, generic questions, and short filler as irrelevant. Note that this proxy is not a substitute for human annotation—it is a deterministic rule set designed to approximate human judgment for the purpose of identifying systematic biases in the heuristic labeler. The heuristic labeler achieved an accuracy of $0.540$, precision of $0.520$, and recall of $0.542$ (F1 = $0.531$) against this proxy. A detailed inspection revealed that Jaccard/cosine-based vocabulary overlap heuristics suffer from construct invalidity: they systematically favor generic greetings (e.g., "Hi! How are you today?") and questions because their high-frequency content words frequently recur, while discarding unique personal facts whose exact wording does not repeat. This finding directly motivated our decision to filter out questions and short turns (under 4 words) from the candidate memory pool, which reduced the dataset from $14,657$ to $8,601$ candidates and improved label quality.
 
 Below are the diagnostic figures illustrating the feature analysis and dimensionality reduction.
 
@@ -98,20 +98,20 @@ The setup is fully reproducible. The dataset is configured with a fixed random s
 
 ## 9. Results
 
-The table below shows the average metrics across the 5 validation folds on the real MSC dataset ($N = 8,601$ memories, $500$ conversations, $17.5\%$ positive rate).
+The table below shows the average metrics across the 5 validation folds on the real MSC dataset ($N = 8,601$ memories, $500$ conversations, $17.5\%$ positive rate). All values are taken directly from `results/metrics.json`.
 
 | Model | Accuracy | Precision | Recall | F1-Score | ROC-AUC | PR-AUC |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **AdaBoost (Best)** | **0.696** | **0.344** | **0.835** | **0.487** | **0.835** | **0.547** |
-| **Logistic Regression** | 0.741 | 0.384 | 0.686 | 0.492 | 0.823 | 0.477 |
-| **k-Nearest Neighbors** | 0.706 | 0.334 | 0.732 | 0.459 | 0.790 | 0.397 |
-| **Decision Tree** | 0.704 | 0.334 | 0.740 | 0.460 | 0.806 | 0.463 |
-| **Random Forest** | 0.751 | 0.380 | 0.491 | 0.428 | 0.809 | 0.466 |
-| *Baseline (Top-K Similarity)* | *0.740* | *0.390* | *0.301* | *0.336* | *0.634* | *0.379* |
+| **AdaBoost (Best)** | **0.723** | **0.373** | **0.842** | **0.516** | **0.835** | **0.547** |
+| **Logistic Regression** | 0.770 | 0.409 | 0.700 | 0.516 | 0.823 | 0.477 |
+| **Decision Tree** | 0.746 | 0.385 | 0.740 | 0.505 | 0.806 | 0.463 |
+| **k-Nearest Neighbors** | 0.725 | 0.363 | 0.752 | 0.489 | 0.790 | 0.397 |
+| **Random Forest** | 0.800 | 0.439 | 0.503 | 0.468 | 0.809 | 0.466 |
+| *Baseline (Top-K Similarity)* | *0.691* | *0.269* | *0.446* | *0.336* | *0.634* | *0.379* |
 
-*Note: Results are evaluated on out-of-fold predictions. Standard deviations for all metrics are under $0.03$, with the exception of the Decision Tree recall standard deviation, which is $0.075$.*
+*Note: Results are evaluated on out-of-fold predictions. Standard deviations for all metrics are under $0.02$, with the exception of the Decision Tree recall standard deviation, which is $0.059$.*
 
-The empirical evaluation shows that all five machine learning models achieve a substantial improvement over the standard vector similarity baseline when predicting memory importance. Across 5-fold out-of-fold cross-validation, the AdaBoost classifier achieved the highest ROC-AUC of 0.835. In comparison, the standard Top-K similarity-based retrieval baseline achieved a much lower F1-score of 0.336 and an ROC-AUC of 0.634. This demonstrates that framing memory selection as a supervised classification task utilizing temporal and conversation-specific metadata is superior to a simple semantic search strategy.
+The empirical evaluation shows that all five machine learning models achieve a substantial improvement over the standard vector similarity baseline when predicting memory importance. Across 5-fold out-of-fold cross-validation, AdaBoost and Logistic Regression tied for the highest F1-score of $0.516$, compared to the baseline's $0.336$—an absolute improvement of $18.0$ percentage points. AdaBoost achieved the highest ROC-AUC of $0.835$ and the highest PR-AUC of $0.547$. The baseline's PR-AUC of $0.379$ indicates that pure semantic similarity retrieval is only slightly better than random on this highly imbalanced dataset. Note that while Random Forest achieves the highest raw accuracy ($0.800$), accuracy is misleading here because a naive majority-class predictor achieves $82.5\%$; F1, PR-AUC, and ROC-AUC are the appropriate evaluation metrics. The F1-score of $0.516$ is lower than the $0.557$ obtained before candidate filtering, because filtering removed the noisy question turns that were inflating scores—the current number reflects honest performance on genuine memory candidates.
 
 Despite the strong performance of our classifiers, there are several avenues that could have yielded higher scores. We could have trained deeper gradient-boosted trees (e.g., XGBoost or LightGBM), which often squeeze out a 2-3% improvement on tabular datasets. We also could have experimented with recursive feature elimination (RFE) or trained separate models for user-spoken and agent-spoken turns to capture role-specific language patterns. However, we chose not to pursue these directions because they introduce significant computational complexity and risk overfitting to the vocabulary patterns of the 500 conversation sample, while our current models run in sub-millisecond time and are highly generalizable.
 
@@ -128,14 +128,14 @@ The table below shows the results under this equal context budget restriction:
 
 | Model (Equal Budget, K=5) | Accuracy | Precision | Recall | F1-Score |
 | :--- | :--- | :--- | :--- | :--- |
-| **AdaBoost** | 0.771 | 0.395 | 0.639 | **0.487** |
-| **Logistic Regression** | 0.770 | 0.394 | 0.636 | 0.485 |
-| **Decision Tree** | 0.763 | 0.382 | 0.617 | 0.470 |
-| **Random Forest** | 0.757 | 0.371 | 0.599 | 0.457 |
-| **k-Nearest Neighbors** | 0.752 | 0.363 | 0.587 | 0.447 |
-| *Baseline (Top-K Similarity)* | 0.740 | 0.390 | 0.301 | 0.336 |
+| **AdaBoost** | 0.761 | 0.390 | 0.647 | **0.487** |
+| **Logistic Regression** | 0.760 | 0.388 | 0.644 | 0.485 |
+| **Decision Tree** | 0.753 | 0.377 | 0.625 | 0.470 |
+| **Random Forest** | 0.747 | 0.366 | 0.607 | 0.457 |
+| **k-Nearest Neighbors** | 0.742 | 0.358 | 0.594 | 0.447 |
+| *Baseline (Top-K Similarity)* | 0.691 | 0.269 | 0.446 | 0.336 |
 
-Under a fixed budget of $K=5$, the AdaBoost classifier achieves an F1-score of $0.487$, compared to the similarity baseline's F1-score of $0.336$. This represents an absolute F1-score increase of **$15.1\%$** under the exact same context window length, proving that metadata-based classification substantially outperforms semantic similarity as a ranking mechanism.
+Under a fixed budget of $K=5$, the AdaBoost classifier achieves an F1-score of $0.487$, compared to the similarity baseline's F1-score of $0.336$. This represents an absolute F1-score increase of **$15.1$ percentage points** under the exact same context window length, proving that metadata-based classification substantially outperforms semantic similarity as a ranking mechanism.
 
 ### 9.2 Qualitative Evaluation (LLM Demo)
 
@@ -203,22 +203,15 @@ If more data and resources were available, the framework could be enhanced by tr
 
 ---
 
-## 13. AI Prompts Used (Mandatory Disclosure)
+## 13. AI Tools Used (Mandatory Disclosure)
 
-In accordance with course academic integrity guidelines, we disclose that Claude-3.5-Sonnet and Gemini-1.5-Pro were utilized for development. The detailed list of prompts and use cases is documented below:
+In accordance with course academic integrity guidelines, we disclose all AI tools used during the development of this project. The primary tool was **Antigravity** (Google DeepMind's agentic coding assistant, running Gemini-series models), used through an iterative chat interface for the majority of pipeline development, report writing, and debugging. Representative use cases are described below:
 
-*   **Coding & Pipeline Architecture**:
-    *   *Prompt*: "Write a Python class using StratifiedGroupKFold from scikit-learn to train and cross-validate five classifiers on conversational memory features, using conversation_id as groups to avoid leakage. Include SMOTE over-sampling within each fold using imbalanced-learn."
-    *   *Use Case*: Guided the implementation of the leakage-free training pipeline in `src/train.py`.
-*   **Feature Engineering & Labeling**:
-    *   *Prompt*: "Design a heuristic labeling system in Python that labels conversational turns as important if they have a semantic similarity >= 0.60 to any turn in the future session, or Jaccard overlap >= 0.30 of content words, or share capitalized entity tokens."
-    *   *Use Case*: Used to build the labeling heuristic in `src/labeling.py`.
-*   **Debugging & Verification**:
-    *   *Prompt*: "The model push is failing with a Broken Pipe error due to a file size limit. Show me how to cache and ignore the 100MB zip file in git while keeping all pipeline assets."
-    *   *Use Case*: Used to configure the `.gitignore` parameters.
-*   **Writing & Editing Support**:
-    *   *Prompt*: "Help me rewrite bulleted list descriptions of features and machine learning models into academic-style flowing prose paragraphs that comply with formal scientific paper guidelines."
-    *   *Use Case*: Applied directly to satisfy the paragraph-format requirements of the grading rubric in Sections 4, 5, and 6.
+*   **Pipeline Scaffolding**: We described the project goal (classifying conversational memory importance on the MSC dataset) and iteratively asked Antigravity to generate the full pipeline structure: data loading, feature engineering, cross-validated training with SMOTE, evaluation plots, and the Ollama LLM demo. The agent produced initial drafts of all `src/` modules and `run_pipeline.py`, which we reviewed, tested, and revised over multiple rounds.
+*   **Feature Engineering & Labeling**: We prompted the agent to design a heuristic labeling system using semantic similarity, Jaccard overlap, and entity overlap to approximate "future reference" labels. The thresholds and implementation in `src/labeling.py` were generated by the agent and refined through iterative testing.
+*   **Report Drafting**: Large portions of the report prose were drafted by the agent based on our project results, then reviewed and edited. Sections 4 (Related Implementations) and 6 (Models Detail) were explicitly rewritten from bullet-point outlines into paragraph format by the agent.
+*   **Debugging & Git Configuration**: We used the agent to debug pipeline errors (e.g., missing imports, large file push failures) and configure `.gitignore`.
+*   **Review & Correction**: A separate review identified fabricated Kaggle URLs, incorrect citation metadata, and mismatched metrics in earlier drafts. These were corrected by regenerating values from `results/metrics.json` and verifying external URLs manually.
 
 ---
 
