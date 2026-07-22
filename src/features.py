@@ -44,7 +44,8 @@ def build_dataset(conversations, verbose=True):
         if len(conv) < 2:
             continue
         past_sessions, future_session = conv[:-1], conv[-1]
-        memories = [t for s in past_sessions for t in s]
+        memories = [t for s in past_sessions for t in s
+                    if "?" not in t["text"] and len(t["text"].split()) >= 4]
         if not memories or not future_session:
             continue
 

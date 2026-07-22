@@ -50,12 +50,31 @@ def run_ablation():
         results[name] = mean
         print(f"[ablation] {name:<18} F1={mean['f1']:.3f}  ROC-AUC={mean['roc_auc']:.3f}  PR-AUC={mean['pr_auc']:.3f}")
 
-    # Also compute similarity-only baseline for reference
-    # similarity baseline cannot be run without semantic_similarity, but we can display the original baseline
-    print("\nComparison with original pipeline (with semantic similarity):")
-    print("AdaBoost (Original): F1=0.557, ROC-AUC=0.827, PR-AUC=0.589")
-    print("LogisticRegression (Original): F1=0.553, ROC-AUC=0.812, PR-AUC=0.525")
-    print("Similarity-only Baseline: F1=0.334, ROC-AUC=0.623, PR-AUC=0.413")
+    # Save ablation results
+    ablation_json_path = os.path.join(config.RESULTS_DIR, "ablation_metrics.json")
+    import json
+    with open(ablation_json_path, "w") as f:
+        json.dump(results, f, indent=2)
+    print(f"[ablation] results saved -> {ablation_json_path}")
+
+    # Comparison with original pipeline (with semantic similarity)
+    original_metrics_path = os.path.join(config.RESULTS_DIR, "metrics.json")
+    if os.path.exists(original_metrics_path):
+        with open(original_metrics_path, "r") as f:
+            orig = json.load(f)
+        orig_results = orig.get("cv_results", {})
+        print("\nComparison with original pipeline (with semantic similarity):")
+        for name in results:
+            if name in orig_results:
+                o_f1 = orig_results[name].get("f1", 0.0)
+                o_auc = orig_results[name].get("roc_auc", 0.0)
+                o_pr = orig_results[name].get("pr_auc", 0.0)
+                print(f"{name:<18} | Original F1={o_f1:.3f} (AUC={o_auc:.3f}) | Ablated F1={results[name]['f1']:.3f} (AUC={results[name]['roc_auc']:.3f})")
+        if "Baseline_TopK_Similarity" in orig_results:
+            b = orig_results["Baseline_TopK_Similarity"]
+            print(f"Similarity-only Baseline: F1={b['f1']:.3f}, ROC-AUC={b['roc_auc']:.3f}")
+    else:
+        print("\nNo original metrics.json found for comparison. Please run main pipeline first.")
 
 if __name__ == "__main__":
     run_ablation()

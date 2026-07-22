@@ -29,6 +29,7 @@ notebook = {
    "source": [
     "import os\n",
     "import sys\n",
+    "import json\n",
     "import pandas as pd\n",
     "import numpy as np\n",
     "import matplotlib.pyplot as plt\n",
@@ -216,7 +217,7 @@ notebook = {
     "fit_final_model(df, best_clf)\n",
     "\n",
     "# Run the LLM demo using the saved model\n",
-    "run_demo(df, dry_run=False)"
+    "run_demo(df, dry_run=True)"
    ]
   },
   {

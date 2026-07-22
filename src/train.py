@@ -110,6 +110,22 @@ def cross_validate(df):
           f"F1={b['f1']:.3f}  ROC-AUC={b['roc_auc']:.3f}  "
           f"PR-AUC={b['pr_auc']:.3f}")
 
+    # --- equal budget evaluation for classifiers -----------------------
+    for name, y_prob_oof in oof.items():
+        eb_pred = np.zeros(len(df), dtype=int)
+        for _, idx in df.groupby("conversation_id").groups.items():
+            idx = list(idx)
+            probs = y_prob_oof[idx]
+            top = np.argsort(probs)[-min(config.TOP_K_BASELINE, len(idx)):]
+            for t in top:
+                eb_pred[idx[t]] = 1
+        eb = _scores(y, eb_pred, y_prob_oof)
+        for k, v in eb.items():
+            all_results[name][f"eb_{k}"] = float(v)
+        print(f"[train] {name + '_EqualBudget':<18} "
+              f"F1={eb['f1']:.3f}  ROC-AUC={eb['roc_auc']:.3f}  "
+              f"PR-AUC={eb['pr_auc']:.3f}")
+
     return all_results, oof
 
 
